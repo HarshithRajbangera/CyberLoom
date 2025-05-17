@@ -136,6 +136,118 @@ body {
   transform: translateY(-5px) scale(1.05);
   box-shadow: 0 8px 20px rgba(0, 255, 231, 0.3);
 }
+body {
+  background-color: #0f0f0f;
+  color: #f0f0f0;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  background: #111;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0, 255, 231, 0.1);
+}
+
+.navbar a {
+  color: #00ffe7;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  color: #ffffff;
+}
+
+.container-box {
+  padding: 2rem;
+}
+
+.materials {
+  max-width: 1000px;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: #1a1a1a;
+  box-shadow: 0 0 30px rgba(0, 255, 231, 0.05);
+}
+
+.materials h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #00ffe7;
+}
+
+/* Tree Menu Styling */
+.tree-folder {
+  margin: 0.5rem 0;
+  padding-left: 1.2rem;
+  border-left: 2px solid #333;
+}
+
+.tree-button {
+  background: none;
+  border: none;
+  color: #5ce1e6;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.4rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.3s ease;
+}
+
+.tree-button:hover {
+  color: #00ffe7;
+}
+
+.tree-button::before {
+  content: "▶";
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.tree-button.open::before {
+  transform: rotate(90deg);
+}
+
+/* PDF Links */
+.pdf-link {
+  text-decoration: none;
+  color: #f0f0f0;
+  padding: 0.3rem 0.7rem;
+  margin: 0.3rem 0;
+  background: #00ffe722;
+  border-radius: 20px;
+  display: inline-block;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.pdf-link:hover {
+  background: #00ffe7;
+  color: #111;
+}
+
+/* Collapsible Section */
+.collapsible {
+  display: none;
+  margin-left: 1rem;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 
 /* Animations */
 @keyframes slideDown {
