@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CyberLoom | Materials</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="index.html#hero">Home</a>
+    <a href="materials.html">Materials</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#meeting">Meet</a>
+  </nav>
+
+  <!-- Materials Section -->
+  <section class="container-box">
+    <div class="container materials">
+      <h2>Available PDFs</h2>
+      <div id="pdf-list">Loading PDFs...</div>
+    </div>
+  </section>
+
+  <script>
+    const user = "HarshithRajbangera";
+    const repo = "CyberLoom";
+    const folder = "materials";
+    const apiUrl = `https://api.github.com/repos/${user}/${repo}/contents/${folder}`;
+    const pdfList = document.getElementById("pdf-list");
+
+    // Function to fetch and list files recursively
+    async function fetchMaterials(url, parentElement) {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Could not fetch materials");
+        const items = await response.json();
+
+        for (const item of items) {
+          if (item.type === "dir") {
+            // Create a new section for the folder
+            const section = document.createElement("div");
+            section.classList.add("folder-section");
+            const title = document.createElement("h3");
+            title.textContent = item.name;
+            section.appendChild(title);
+
+            const subList = document.createElement("div");
+            section.appendChild(subList);
+            parentElement.appendChild(section);
+
+            // Recursively fetch contents of subfolder
+            await fetchMaterials(item.url, subList);
+          }
+          else if (item.type === "file" && item.name.endsWith(".pdf")) {
+            // Create a link for the PDF
+            const link = document.createElement("a");
+            link.textContent = item.name;
+            link.href = `https://docs.google.com/gview?url=${encodeURIComponent(item.download_url)}&embedded=true`;
+            link.target = "_blank";
+            link.classList.add("pdf-link");
+            parentElement.appendChild(link);
+          }
+        }
+      }
+      catch (error) {
+        console.error(error);
+        parentElement.textContent = "Failed to load materials.";
+      }
+    }
+
+    // Initial fetch
+    fetchMaterials(apiUrl, pdfList);
+  </script>
+
+</body>
+</html>
