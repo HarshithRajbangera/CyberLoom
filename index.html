@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CyberLoom | Home</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="#">Home</a>
+    <a href="#">Material</a>
+    <a href="https://meet.google.com/vws-kzdo-zud">Meet</a>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-slider">
+    <div class="slide" style="background-image: url('img2.jpg');"></div>
+    <div class="slide" style="background-image: url('img3.jpg');"></div>
+    <div class="slide" style="background-image: url('img1.jpg');"></div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- About Section -->
+    <section class="description">
+      <h2>About <strong>CyberLoom by Cybotic</strong></h2>
+      <p><strong>CyberLoom</strong> is an exclusive, student-driven, industry-oriented academy under the
+        <em>Cybotic</em> chapter at <strong>Mangalore Institute of Technology and Engineering</strong>. Designed to
+        bridge the gap between classroom learning and real-world industry demands, CyberLoom is built on the principles
+        of <strong>project-based learning, continuous mentorship, and active industry engagement</strong>.
+      </p>
+
+      <h3>What We Do</h3>
+      <ul>
+        <li><strong>Project-Based Learning:</strong> Weekly real-time projects on new tools and technologies.</li>
+        <li><strong>Weekly Mentorship & Expert Sessions:</strong> Ongoing sessions with industry mentors and alumni.
+        </li>
+        <li><strong>Workshops & Industry Talks:</strong> Direct exposure to operational environments and emerging
+          trends.</li>
+        <li><strong>Strong Industry & Alumni Network:</strong> Continuous opportunities for networking and growth.</li>
+        <li><strong>Performance-Driven Community:</strong> Active contribution mandatory for all members.</li>
+      </ul>
+
+      <h3>Why The Name <strong>CyberLoom</strong>?</h3>
+      <p>Like a loom weaving threads into connected fabric, <strong>CyberLoom</strong> aims to weave <strong>skills,
+          projects, mentors, industry connections, and careers</strong> into one platform for students passionate about
+        <strong>IoT, Cybersecurity, Blockchain, and emerging tech</strong>.
+      </p>
+
+      <h3>Join The Movement</h3>
+      <p>For passionate, career-driven students ready to go beyond classrooms with projects, mentorship, and industry
+        exposure — <strong>CyberLoom is your space.</strong></p>
+    </section>
+
+    <!-- Quick Access Boxes -->
+    <section class="container-box">
+      <div class="materials container">
+        <h2>Available PDFs</h2>
+        <ul id="pdf-list">Loading PDFs...</ul>
+      </div>
+
+      <div class="container">
+        <h2>Meetings</h2>
+        <a href="https://meet.google.com/vws-kzdo-zud">Join Meeting</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Fetch PDFs Script -->
+  <script>
+    const user = "HarshithRajbangera";
+    const repo = "CyberLoom";
+    const folder = "materials";
+
+    const pdfList = document.getElementById("pdf-list");
+
+    fetch(`https://api.github.com/repos/${user}/${repo}/contents/${folder}`)
+      .then(response => {
+        if (!response.ok) throw new Error("Could not fetch materials");
+        return response.json();
+      })
+      .then(files => {
+        pdfList.innerHTML = "";
+        files.forEach(file => {
+          if (file.name.endsWith(".pdf")) {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            a.textContent = file.name;
+            a.href = `https://docs.google.com/gview?url=${encodeURIComponent(file.download_url)}&embedded=true`;
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+            li.appendChild(a);
+            pdfList.appendChild(li);
+          }
+        });
+        if (pdfList.children.length === 0) {
+          pdfList.textContent = "No PDFs found.";
+        }
+      })
+      .catch(error => {
+        pdfList.textContent = "Failed to load PDFs.";
+        console.error(error);
+      });
+  </script>
+
+</body>
+
+</html>
