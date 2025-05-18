@@ -45,19 +45,31 @@ body {
   overflow: hidden;
 }
 
+/* Slides - Default (Desktop) */
 .slide {
   position: absolute;
   width: 100%;
   height: 100%;
   background-size: cover;
   background-position: center;
-  animation: slideAnimation 18s infinite;
   opacity: 0;
+  animation: slideAnimation 18s infinite;
 }
 
-.slide:nth-child(1) { animation-delay: 0s; }
-.slide:nth-child(2) { animation-delay: 6s; }
-.slide:nth-child(3) { animation-delay: 12s; }
+.slide:nth-child(1) {
+  background-image: url('img/img2.jpg');
+  animation-delay: 0s;
+}
+
+.slide:nth-child(2) {
+  background-image: url('img/img3.jpg');
+  animation-delay: 6s;
+}
+
+.slide:nth-child(3) {
+  background-image: url('img/img1.jpg');
+  animation-delay: 12s;
+}
 
 @keyframes slideAnimation {
   0% { opacity: 0; }
@@ -136,37 +148,8 @@ body {
   transform: translateY(-5px) scale(1.05);
   box-shadow: 0 8px 20px rgba(0, 255, 231, 0.3);
 }
-body {
-  background-color: #0f0f0f;
-  color: #f0f0f0;
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  padding: 0;
-}
 
-.navbar {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  background: #111;
-  padding: 1rem;
-  box-shadow: 0 0 10px rgba(0, 255, 231, 0.1);
-}
-
-.navbar a {
-  color: #00ffe7;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.navbar a:hover {
-  color: #ffffff;
-}
-
-.container-box {
-  padding: 2rem;
-}
-
+/* Materials Page Styling */
 .materials {
   max-width: 1000px;
   margin: auto;
@@ -242,13 +225,6 @@ body {
   margin-left: 1rem;
 }
 
-/* Fade in animation */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-
 /* Animations */
 @keyframes slideDown {
   from { opacity: 0; transform: translateY(-20px); }
@@ -262,8 +238,25 @@ body {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  .hero-slider {
+    height: 60vh;
+  }
+
   .container-box {
     flex-direction: column;
     align-items: center;
+  }
+
+  /* Override Background Images for Mobile */
+  .slide:nth-child(1) {
+    background-image: url('img/imgs2.jpg');
+  }
+
+  .slide:nth-child(2) {
+    background-image: url('img/imgs3.jpg');
+  }
+
+  .slide:nth-child(3) {
+    background-image: url('img/imgs1.jpg');
   }
 }
